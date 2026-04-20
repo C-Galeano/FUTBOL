@@ -3,6 +3,7 @@ package com.cristian.futbol_api.service;
 import com.cristian.futbol_api.model.Jugador;
 import com.cristian.futbol_api.repository.JugadorRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -28,5 +29,9 @@ public class JugadorService {
 
     public List<Jugador> masDeXGoles(int goles) {
         return repository.jugadoresConMasDeXGoles(goles);
+    }
+
+    public void eliminar(Long id) {
+        repository.deleteById(id);
     }
 }
