@@ -1,7 +1,7 @@
 package com.cristian.futbol_api.controller;
 
 import com.cristian.futbol_api.model.Equipo;
-import com.cristian.futbol_api.repository.EquipoRepository;
+import com.cristian.futbol_api.service.EquipoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,29 +11,29 @@ import java.util.List;
 @CrossOrigin("*")
 public class EquipoController {
 
-    private final EquipoRepository repository;
+    private final EquipoService service;
 
-    public EquipoController(EquipoRepository repository) {
-        this.repository = repository;
+    public EquipoController(EquipoService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Equipo> listar() {
-        return repository.findAll();
+        return service.listar();
     }
 
     @PostMapping
     public Equipo guardar(@RequestBody Equipo equipo) {
-        return repository.save(equipo);
+        return service.guardar(equipo);
     }
 
     @GetMapping("/{id}")
     public Equipo obtener(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
+        return service.obtener(id);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
-        repository.deleteById(id);
+        service.eliminar(id);
     }
 }

@@ -1,7 +1,7 @@
 package com.cristian.futbol_api.controller;
 
 import com.cristian.futbol_api.model.Partido;
-import com.cristian.futbol_api.repository.PartidoRepository;
+import com.cristian.futbol_api.service.PartidoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,41 +11,41 @@ import java.util.List;
 @CrossOrigin("*")
 public class PartidoController {
 
-    private final PartidoRepository repository;
+    private final PartidoService service;
 
-    public PartidoController(PartidoRepository repository) {
-        this.repository = repository;
+    public PartidoController(PartidoService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Partido> listar() {
-        return repository.findAll();
+        return service.listar();
     }
 
     @PostMapping
     public Partido guardar(@RequestBody Partido partido) {
-        return repository.save(partido);
+        return service.guardar(partido);
     }
 
     @GetMapping("/{id}")
     public Partido obtener(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
+        return service.obtener(id);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
-        repository.deleteById(id);
+        service.eliminar(id);
     }
 
-    // 🔥 CONSULTA: total goles por equipo
+    // 🔥 consulta
     @GetMapping("/goles/{idEquipo}")
     public Integer totalGoles(@PathVariable Long idEquipo) {
-        return repository.totalGolesEquipo(idEquipo);
+        return service.totalGoles(idEquipo);
     }
 
-    // 🔥 CONSULTA: resultados partidos
+    // 🔥 consulta
     @GetMapping("/resultados")
     public List<Object[]> resultados() {
-        return repository.resultadosPartidos();
+        return service.resultados();
     }
 }

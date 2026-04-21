@@ -1,43 +1,19 @@
 package com.cristian.futbol_api.service;
 
 import com.cristian.futbol_api.model.Partido;
-import com.cristian.futbol_api.repository.PartidoRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class PartidoService {
+public interface PartidoService {
 
-    private final PartidoRepository repository;
+    List<Partido> listar();
 
-    public PartidoService(PartidoRepository repository) {
-        this.repository = repository;
-    }
+    Partido guardar(Partido partido);
 
-    public List<Partido> listar() {
-        return repository.findAll();
-    }
+    Partido obtener(Long id);
 
-    public Partido guardar(Partido partido) {
-        return repository.save(partido);
-    }
+    void eliminar(Long id);
 
-    public Partido obtener(Long id) {
-        return repository.findById(id).orElse(null);
-    }
+    Integer totalGoles(Long idEquipo);
 
-    public void eliminar(Long id) {
-        repository.deleteById(id);
-    }
-
-    // 🔥 consulta
-    public Integer totalGoles(Long idEquipo) {
-        return repository.totalGolesEquipo(idEquipo);
-    }
-
-    // 🔥 consulta
-    public List<Object[]> resultados() {
-        return repository.resultadosPartidos();
-    }
+    List<Object[]> resultados();
 }

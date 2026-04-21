@@ -1,37 +1,17 @@
 package com.cristian.futbol_api.service;
 
 import com.cristian.futbol_api.model.Jugador;
-import com.cristian.futbol_api.repository.JugadorRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class JugadorService {
+public interface JugadorService {
 
-    private final JugadorRepository repository;
+    List<Jugador> listar();
 
-    public JugadorService(JugadorRepository repository) {
-        this.repository = repository;
-    }
+    Jugador guardar(Jugador jugador);
 
-    public List<Jugador> listar() {
-        return repository.findAll();
-    }
+    List<Jugador> porEquipo(Long idEquipo);
 
-    public Jugador guardar(Jugador jugador) {
-        return repository.save(jugador);
-    }
+    List<Jugador> masDeXGoles(int goles);
 
-    public List<Jugador> porEquipo(Long idEquipo) {
-        return repository.obtenerJugadoresPorEquipo(idEquipo);
-    }
-
-    public List<Jugador> masDeXGoles(int goles) {
-        return repository.jugadoresConMasDeXGoles(goles);
-    }
-
-    public void eliminar(Long id) {
-        repository.deleteById(id);
-    }
+    void eliminar(Long id);
 }

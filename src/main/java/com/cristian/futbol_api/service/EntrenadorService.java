@@ -1,33 +1,15 @@
 package com.cristian.futbol_api.service;
 
 import com.cristian.futbol_api.model.Entrenador;
-import com.cristian.futbol_api.repository.EntrenadorRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class EntrenadorService {
+public interface EntrenadorService {
 
-    private final EntrenadorRepository repository;
+    List<Entrenador> listar();
 
-    public EntrenadorService(EntrenadorRepository repository) {
-        this.repository = repository;
-    }
+    Entrenador guardar(Entrenador entrenador);
 
-    public List<Entrenador> listar() {
-        return repository.findAll();
-    }
+    Entrenador obtener(Long id);
 
-    public Entrenador guardar(Entrenador entrenador) {
-        return repository.save(entrenador);
-    }
-
-    public Entrenador obtener(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    public void eliminar(Long id) {
-        repository.deleteById(id);
-    }
+    void eliminar(Long id);
 }
