@@ -3,6 +3,7 @@ package com.cristian.futbol_api.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Data
@@ -16,5 +17,6 @@ public class Equipo {
 
     private String nombre;
     private String ciudad;
-    private String fundacion;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fundacion;
 }
